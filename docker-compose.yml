@@ -6,7 +6,8 @@ services:
       - '7474:7474'
       - '7473:7473'
       - '7687:7687'
-
+    environment:
+      - NEO4J_HOST=172.24.0.2
   mysql:
     image: mysql:8.0
     cap_add:
@@ -18,12 +19,19 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'    
     ports:
       - '3307:3306'
-  python:
-    build: .
-    depends_on:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
       - mysql
-      - neo4j
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
     restart: always
+    ports:
+      - 8081:80
+
 volumes:
   neo4j_data:
     driver: local

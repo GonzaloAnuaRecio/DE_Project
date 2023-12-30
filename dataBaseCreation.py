@@ -5,6 +5,7 @@ con = mysql.connector.connect(
     host="0.0.0.0",
     user="root",
     password="root",
+    port=3307
 )
 
 executor = con.cursor()
@@ -19,7 +20,7 @@ executor.execute("""
 CREATE TABLE IF NOT EXISTS Authors (
     Author_ID INT PRIMARY KEY,
     Author_Name VARCHAR(100) NOT NULL,
-    Author_Affiliation VARCHAR(100) NOT NULL,
+    Author_Affiliation VARCHAR(2000) NOT NULL,
     Author_Gender  VARCHAR(20) NOT NULL
 ); """)
 
@@ -37,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Papers (
 executor.execute("""
 CREATE TABLE IF NOT EXISTS Journals (
     Journal_ID INT PRIMARY KEY,
-    Journal_Name VARCHAR(200) NOT NULL,
+    Journal_Name VARCHAR(2000) NOT NULL,
     Journal_Type VARCHAR(50) NOT NULL
 ); """)
 executor.execute("""
@@ -80,7 +81,7 @@ except Exception as e:
 
 print("a")
 #Insercion de los datos
-with open('ejemplo2.json') as json_data:
+with open('test.json') as json_data:
     data = json.load(json_data)
 
 
@@ -163,11 +164,13 @@ for element in data:
     
     #Citations
     for cit in element['citations']:
-        executor.execute("""
-                    INSERT INTO Citations (paper1, paper2) VALUES
-                    (%s, %s)
-                """, (element['paper_id'], cit))
-
+        try: # The json has duplicate Citations but citations are PRIMARY KEYS.
+            executor.execute("""
+                        INSERT INTO Citations (paper1, paper2) VALUES
+                        (%s, %s)
+                    """, (element['paper_id'], cit))
+        except:
+            pass
     #Entrada Journal
     auxId = idJournal
 
@@ -191,12 +194,14 @@ for element in data:
     con.commit()
     #Fact Table
     for authID in iterationAuthors:
-        print(element['paper_id'], authID , auxId)
-        executor.execute("""
-                INSERT INTO Papers_ID (Paper_ID, Author_ID, Journal_ID) VALUES
-                (%s, %s, %s)
-            """, (element['paper_id'], authID , auxId))
-
+        try:
+            print(element['paper_id'], authID , auxId)
+            executor.execute("""
+                    INSERT INTO Papers_ID (Paper_ID, Author_ID, Journal_ID) VALUES
+                    (%s, %s, %s)
+                """, (element['paper_id'], authID , auxId))
+        except:
+            pass
     
     idJournal += 1 
 

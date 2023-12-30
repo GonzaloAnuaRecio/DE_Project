@@ -72,9 +72,7 @@ class Neo4jPopulator:
                 try:
                     session.run(query)
                 except Exception as e:
-                    print(e)
-                    print('Ya existe ese autor')
-                
+                    pass                
 
 if __name__ == "__main__":
     neo4j_uri = "bolt://localhost:7687"

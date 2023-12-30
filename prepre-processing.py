@@ -3,11 +3,16 @@ from langdetect import detect
 import crossref_commons.retrieval
 import random
 import requests
+import sys
+
 n = 5000 #Number of data to take
+if len(sys.argv) > 2:
+    n = int(sys.argv[2])
+
 crossrefs = {}
 def openData():
     data = []
-    with open('arxiv-metadata-oai-snapshot.json', 'r') as file:
+    with open('../arxiv-metadata-oai-snapshot.json', 'r') as file:
         for line in file:
             if len(data) <= n:
                 data.append(json.loads(line))
@@ -40,8 +45,16 @@ def cleansing(data):
 
     def clean_author(crossref):
         #Normalize author names using crossref API
-        given = [i["given"].lower()  if i["given"] else "" for i in crossref["author"]]
-        family = [i["family"].lower()  if i["family"] else "" for i in crossref["author"]]
+        given, family = [], []
+        for i in crossref["author"]:
+            try:
+                given.append(i["given"].lower())
+            except:
+                given.append("Unkown")
+            try:
+                family.append(i["given"].lower())
+            except:
+                family.append("Unkown")
         return ["".join(f"{i} {j}".split()) for i, j in zip(given, family)]
     dois = set()
     clean = []
@@ -52,7 +65,8 @@ def cleansing(data):
             except:
                 continue
             crossrefs[i["doi"]] = crossref # So we don't have to request again to the API
-            i["authors"] = clean_author(crossref)
+            if "author" in crossref:
+                i["authors"] = clean_author(crossref)
             remove(i)
 
             if not i["journal-ref"]:

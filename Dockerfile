@@ -9,4 +9,3 @@ WORKDIR /src
 RUN pip install -r requirements.txt
 
 CMD ["python",  "dataBaseCreation.py"]
-CMD ["python",  "dataBaseCreationNeo4J.py"]
