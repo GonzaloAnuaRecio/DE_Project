@@ -16,7 +16,7 @@ class Neo4jPopulator:
             queries.append("CREATE CONSTRAINT FOR (a:Author) REQUIRE a.name IS UNIQUE;")
             queries.append("CREATE CONSTRAINT FOR (j:Journal) REQUIRE j.name IS UNIQUE;")
 
-            with open('ejemplo.json') as json_data:
+            with open('test.json') as json_data:
                 data = json.load(json_data)
 
             for element in data:
@@ -76,9 +76,9 @@ class Neo4jPopulator:
                 
 
 if __name__ == "__main__":
-    neo4j_uri = "bolt://localhost:7687"
+    neo4j_uri = "bolt://127.0.0.1:7687"
     neo4j_user = "neo4j"
-    neo4j_password = "rootroot"
+    neo4j_password = "bitnami1"
 
     populator = Neo4jPopulator(neo4j_uri, neo4j_user, neo4j_password)
 

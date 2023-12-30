@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  neo4j:
+    image: docker.io/bitnami/neo4j:5
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+
+  mysql:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      MYSQL_USER: 'root2'
+      MYSQL_PASSWORD: 'root2'
+      MYSQL_ROOT_PASSWORD: 'root'    
+    ports:
+      - '3307:3306'
+  python:
+    build: .
+    depends_on:
+      - mysql
+      - neo4j
+    restart: always
+volumes:
+  neo4j_data:
+    driver: local
+  db:
+    driver: local

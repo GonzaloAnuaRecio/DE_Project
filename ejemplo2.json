@@ -1,0 +1,52 @@
+[
+    {
+        "author_name" : ["Michael Jackson", "Maria Luisa", "Mikel Larranaga"],
+        "author_affiliation" : "EHU",
+        "author_gender" : "Male",
+        "paper_id" : "0704.0065",
+        "paper_doi": "10.1103/PhysRevD.76.013009",
+        "paper_title" : "La consecuencias de la creacion de la bomba atomica",
+        "paper_publication_date" : "2023-01-09",
+        "paper_update_date" : "2023-04-12",
+        "paper_number_of_pages" : 10,
+        "paper_category": "Medical",
+        "journal_name" : "Hola!",
+        "journal_type": "Technological",
+        "citations" : ["0704.0062"]
+    },
+
+    {
+        "author_name" : ["Michael Jackson", "Kasparova", "Maria Luisa"],
+        "author_affiliation" : "EHU",
+        "author_gender" : "Male",
+        "paper_id" : "0704.0067",
+        "paper_doi": "10.1103/PhysRevLett.99.048301",
+        "paper_title" : "Dragoi bola",
+        "paper_publication_date" : "2022-01-09",
+        "paper_update_date" : "2024-04-12",
+        "paper_number_of_pages" : 15,
+        "paper_category": "Financial",
+        "journal_name" : "LOLETE",
+        "journal_type": "Medical",
+        "citations" : ["0704.0060", "0704.0062"]
+    },
+
+    {
+        "author_name" : ["Kasparova", "El Txikilikuatre"],
+        "author_affiliation" : "University of Moscow",
+        "author_gender" : "Female",
+        "paper_id" : "0704.0068",
+        "paper_doi": "Non",
+        "paper_title" : "Contra Deep Blue 2",
+        "paper_publication_date" : "2021-11-06",
+        "paper_update_date" : "2021-11-06",
+        "paper_number_of_pages" : 80,
+        "paper_category": "Scientific",
+        "journal_name" : "APA!",
+        "journal_type": "Euskera",
+        "citations" : ["0704.0060", "0704.0061"]
+    }
+
+
+    
+]
