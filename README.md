@@ -16,9 +16,15 @@ pip install -r requirements.
 sh main.sh
 
 After the sh is executed (may take quite a long time), the databases will be populated. Here are the links where the UI's will be deployed.
+
 neo4j -> 172.24.0.2:7474
+
 Username: neo4j
+
 Password: root
+
 phpMyAdmin -> http://localhost:8081
+
 Username: root
+
 Password: root
